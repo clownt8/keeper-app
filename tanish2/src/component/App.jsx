@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import Note from "./Note";
-import notes from "../notes";
 import Login from "./Login";
 import Register from "./Register";
+import CreateArea from "./CreateArea";
 
 function App() {
 
@@ -12,7 +12,7 @@ function App() {
   const[y,sety]= useState(false);
   const[backuser,setbackuser]=useState("")
   const[backpass,setbackPass]=useState("")
-  
+  const [notes, setNotes] = useState([]);
   
   function fetchinfo(p) {
     setbackuser(p.user);
@@ -24,25 +24,42 @@ function App() {
     if(p.user===backuser && p.pass===backpass){
       setx(true);
     }
- console.log(p.user)
-    console.log(p.pass)
+ 
+  }
+ 
+
+  function addNote(newNote) {
+    setNotes(prevNotes => {
+      return [...prevNotes, newNote];
+    });
+  }
+
+  function deleteNote(id) {
+    setNotes(prevNotes => {
+      return prevNotes.filter((noteItem, index) => {
+        return index !== id;
+      });
+    });
   }
 
  
-
     return(
        <div className="container"> 
        {
          y? (x ? (<div> 
                 <Header />
-                {notes.map((detail1)=>
-                  (<Note
-                  key={detail1.key}
-                  title={detail1.title}
-                  content={detail1.content}
-                  />)
-                )
-                }    
+                <CreateArea onAdd={addNote} />
+      {notes.map((noteItem, index) => {
+        return (
+          <Note
+            key={index}
+            id={index}
+            title={noteItem.title}
+            content={noteItem.content}
+            onDelete={deleteNote}
+          />
+        );
+      })} 
                 <Footer />
                 </div>)
                 :  (<Login 
