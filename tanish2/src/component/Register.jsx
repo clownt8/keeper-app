@@ -1,8 +1,8 @@
 import React from "react";
 import Input from "./Input"
-import Button from "./Button"
 
-function Register(){
+
+function Register(props){
     return(<form classame="form">
 
     <Input 
@@ -17,8 +17,7 @@ function Register(){
     type="password"
     placeholder="confirm password" />
     
-    <Button 
-    text="Login" />
+    <button onClick={props.y1} type="submit">Register</button>
     
     
 </form>)

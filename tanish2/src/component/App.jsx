@@ -1,17 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import Note from "./Note";
 import notes from "../notes";
 import Login from "./Login";
 import Register from "./Register";
-var userisregister = true;
-var log = false ;
+
 function App() {
+  const[x,setx]= useState(false);
+  const[y,sety]= useState(false);
+  function x1(){
+    setx(true);
+  }
+
+  
+  function y1(){
+    sety(true);
+  }
+
+
+
     return(
        <div className="container"> 
        {
-         userisregister ? (log ? (<div> 
+         y? (x ? (<div> 
                 <Header />
                 {notes.map((detail1)=>
                   (<Note
@@ -23,8 +35,10 @@ function App() {
                 }    
                 <Footer />
                 </div>)
-                :  (<Login />))
-            : <Register />
+                :  (<Login 
+                x1={x1}/>))
+            : <Register 
+            y1={y1} />
             }
        </div>     
 )}

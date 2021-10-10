@@ -1,8 +1,8 @@
 import React from "react";
 import Input from "./Input"
-import Button from "./Button"
 
-function Login(){
+
+function Login(props){
     return(<form classame="form">
 
     <Input 
@@ -11,9 +11,8 @@ function Login(){
      <Input 
     type="password"
     placeholder="password" />
-    <Button 
-    text="Login" />
-    
+   
+    <button onClick={props.x1} type="submit">login</button>
     
 </form>)
     
