@@ -7,18 +7,28 @@ import Login from "./Login";
 import Register from "./Register";
 
 function App() {
+
   const[x,setx]= useState(false);
   const[y,sety]= useState(false);
-  function x1(){
-    setx(true);
-  }
-
+  const[backuser,setbackuser]=useState("")
+  const[backpass,setbackPass]=useState("")
   
-  function y1(){
+  
+  function fetchinfo(p) {
+    setbackuser(p.user);
+    setbackPass(p.pass);
     sety(true);
+}
+  function fetchlogininfo(p) {
+   
+    if(p.user===backuser && p.pass===backpass){
+      setx(true);
+    }
+ console.log(p.user)
+    console.log(p.pass)
   }
 
-
+ 
 
     return(
        <div className="container"> 
@@ -36,9 +46,11 @@ function App() {
                 <Footer />
                 </div>)
                 :  (<Login 
-                x1={x1}/>))
+                  fetchlogininfo={fetchlogininfo}
+               />))
             : <Register 
-            y1={y1} />
+            fetchinfo={fetchinfo}
+            />
             }
        </div>     
 )}

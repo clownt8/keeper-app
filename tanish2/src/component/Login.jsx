@@ -1,18 +1,39 @@
-import React from "react";
-import Input from "./Input"
+import React, { useState } from "react";
+
 
 
 function Login(props){
-    return(<form classame="form">
 
-    <Input 
-    type="text"
-    placeholder="username" />
-     <Input 
-    type="password"
-    placeholder="password" />
+    const[over, setover]=useState(false);
+    const[user,setuser]=useState("")
+    const[pass,setPass]=useState("")
    
-    <button onClick={props.x1} type="submit">login</button>
+
+    function over1() {
+            setover(true);}
+        function out1() {
+            setover(false); }
+            function handleusername(event){
+                setuser(event.target.value)
+            }
+            function handlepass(event){
+                setPass(event.target.value)
+            }
+            function handleclick(){
+                 props.fetchlogininfo({user,pass})
+                 
+            }
+           
+
+    return(<form classame="form">
+           <input  spellCheck="false" onChange={handleusername} value={user} type="text" placeholder="username" />
+           <input   onChange={handlepass} value= {pass} type="password" placeholder="password"/>
+   
+    <button
+    style={{backgroundColor: over ? "black" : "white"}}
+    onMouseOver={over1}
+    onMouseOut={out1}
+     onClick={handleclick} type="submit">login</button>
     
 </form>)
     
